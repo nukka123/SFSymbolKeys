@@ -21,13 +21,13 @@ struct SFSymbolVersionMDGen: ParsableCommand {
         output += "| :--: | :--: | :--: | :--: | :--: | :--: | :--: |\n"
         for group in keyGroups {
             output += [
-                "| " + group.config.version,
-                group.config.availability.iOS,
-                group.config.availability.macOS,
-                group.config.availability.macCatalyst,
-                group.config.availability.tvOS,
-                group.config.availability.watchOS,
-                group.config.availability.visionOS + " |",
+                "| " + group.config.version.string,
+                group.config.availability.iOS.string,
+                group.config.availability.macOS.string,
+                group.config.availability.macCatalyst.string,
+                group.config.availability.tvOS.string,
+                group.config.availability.watchOS.string,
+                group.config.availability.visionOS.string + " |",
             ].joined(separator: " | ") + "\n"
         }
         return output
