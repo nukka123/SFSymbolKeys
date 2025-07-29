@@ -7,6 +7,8 @@ SFSymbolKeys は、SF Symbols の名前を、タイピング安全な識別子�
 
 Swift 6.2 で導入された Raw Identifier 構文により、SF Symbols の名前が、そのまま識別子 (例: `` `9.square.fill` ``) として利用可能です。
 
+> **Note:** このライブラリは現在ドラフト版です。将来のバージョンでAPIが変更される可能性があります。現時点では `main` ブランチを指定して利用してください。
+
 > (日本語版) [README-ja.md](./README-ja.md)
 
 ## 特長
@@ -26,7 +28,7 @@ Swift 6.2 で導入された Raw Identifier 構文により、SF Symbols の名�
 `Package.swift`に以下を追加してください。
 
 ```swift
-.package(url: "https://github.com/あなたのユーザー名/SFSymbolKeys.git", from: "1.0.0")
+.package(url: "https://github.com/nukka123/SFSymbolKeys.git", branch: "main")
 ```
 
 dependencies に `SFSymbolKeys` を追加します。
@@ -46,10 +48,11 @@ dependencies に `SFSymbolKeys` を追加します。
 2. 検索欄に以下のURLを入力します。
    
    ```
-   https://github.com/あなたのユーザー名/SFSymbolKeys.git
+   https://github.com/nukka123/SFSymbolKeys.git
    ```
-3. バージョン指定（例: "Up to Next Major" 1.0.0）を選択し、「Add Package」をクリックします。
-4. 対象ターゲットに`SFSymbolKeys`を追加してください。
+3. Dependency Rule で "Branch" を選択し、`main` と入力します。
+4. 「Add Package」をクリックします。
+5. 対象ターゲットに`SFSymbolKeys`を追加してください。
 
 ## 使い方
 
