@@ -1,0 +1,9 @@
+rectangle.leadinghalf.filled
+rectangle.trailinghalf.filled
+square.3.layers.3d.down.left.slash
+square.3.layers.3d.down.right.slash
+airpod.gen3.left
+airpod.gen3.right
+airpods.gen3
+airpods.gen3.chargingcase.wireless
+airpods.gen3.chargingcase.wireless.fill

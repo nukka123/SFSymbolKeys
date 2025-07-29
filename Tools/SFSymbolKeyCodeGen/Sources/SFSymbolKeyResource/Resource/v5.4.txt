@@ -1,0 +1,7 @@
+beats.pill
+beats.pill.fill
+beats.solobuds
+beats.solobuds.chargingcase
+beats.solobuds.chargingcase.fill
+beats.solobuds.left
+beats.solobuds.right

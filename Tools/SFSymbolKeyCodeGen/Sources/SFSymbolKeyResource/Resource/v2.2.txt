@@ -1,0 +1,5 @@
+character.bubble
+character.bubble.fill
+character.cursor.ibeam
+character.textbox
+applewatch.side.right

@@ -1,0 +1,7 @@
+camera.macro
+camera.macro.circle
+camera.macro.circle.fill
+dots.and.line.vertical.and.cursorarrow.rectangle
+key.viewfinder
+person.badge.key
+person.badge.key.fill

@@ -1,0 +1,2 @@
+square.and.arrow.up.badge.clock
+square.and.arrow.up.badge.clock.fill

@@ -1,0 +1,6 @@
+beats.powerbeats.pro.2.chargingcase.fill
+beats.powerbeats.pro.2.chargingcase
+beats.powerbeats.pro.2.left
+beats.powerbeats.pro.2.right
+beats.powerbeats.pro.2
+apple.intelligence.badge.xmark

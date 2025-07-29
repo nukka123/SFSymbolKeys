@@ -1,0 +1,6 @@
+chevron.compact.backward
+chevron.compact.forward
+person.crop.square.badge.camera
+person.crop.square.badge.camera.fill
+person.crop.square.badge.video
+person.crop.square.badge.video.fill
