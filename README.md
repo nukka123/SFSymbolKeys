@@ -7,7 +7,7 @@ SFSymbolKeys is a Swift library that allows you to use SF Symbols names as typo-
 
 With the Raw Identifier syntax introduced in Swift 6.2, SF Symbols names can be used directly as identifiers (e.g., `` `9.square.fill` ``).
 
-> **Note:** This library is currently in a draft state. The API may change in future versions. Please use the `main` branch for now.
+> **Note:** This library is in the early stages of development. The API may change in future versions.
 
 > (日本語版) [README-ja.md](./README-ja.md)
 
@@ -25,10 +25,10 @@ With the Raw Identifier syntax introduced in Swift 6.2, SF Symbols names can be 
 
 ### Swift Package Manager
 
-Add the following to your `Package.swift`:
+Add the following to the `dependencies` in your `Package.swift` file:
 
 ```swift
-.package(url: "https://github.com/nukka123/SFSymbolKeys.git", branch: "main")
+.package(url: "https://github.com/nukka123/SFSymbolKeys.git", from: "0.0.1")
 ```
 
 Add `SFSymbolKeys` to your dependencies:
@@ -44,15 +44,15 @@ Add `SFSymbolKeys` to your dependencies:
 
 ### Xcode
 
-1. In Xcode, select "File" > "Add Packages..."
-2. Enter the following URL:
+1. In Xcode, go to "File" > "Add Packages...".
+2. Enter the repository URL in the search bar:
 
    ```
    https://github.com/nukka123/SFSymbolKeys.git
    ```
-3. For the Dependency Rule, select "Branch" and enter `main`.
+3. For "Dependency Rule", select "Up to Next Major Version" and specify the version as `0.0.1`.
 4. Click "Add Package".
-5. Add `SFSymbolKeys` to your target.
+5. Add the `SFSymbolKeys` library to your app's target.
 
 
 ## Usage
