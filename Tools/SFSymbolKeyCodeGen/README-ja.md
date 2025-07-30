@@ -13,23 +13,29 @@
 
 ## SFSymbolKeyCodeGen
 
+executableTarget である SFSymbolKeyCodeGen は、SFSymbolKeysライブラリを更新するためのサブコマンドを総括します。
+
+以下のコマンドで、簡単なヘルプが確認できます。
+
+> $ swift run SFSymbolKeyCodeGen -h
+
+以下のコマンドで、SFSymbolKeysライブラリの更新に必要な全てのサブコマンドが実行されます。
+
+> $ swift run SFSymbolKeyCodeGen
+
+現時点では CodeGen, MDGen が実行されます。
+
+### Subcommand: CodeGen
+
 SFSymbolKeyResource で読み込んだ SF Symbols の名前一覧から、`SFSymbolKey` の識別子を定義するコードを生成します。
 
 生成したコードは `SFSymbolKeys/Sources/SFSymbolKeys/Generated/` の場所に出力されます。
 
-### 実行例:
-
-> $ swift run SFSymbolKeyCodeGen
-
-## SFSymbolVersionMDGen
+### Subcommand: MDGen
 
 SFSymbolKeyResource で読み込んだ SF Symbols のバージョン情報から、バージョン一覧の Markdown を生成します。
 
 生成した Markdown は `SFSymbolKeys/Docs/SFSymbolVersions.md` の場所に出力されます。
-
-### 実行例:
-
-> $ swift run SFSymbolVersionMDGen
 
 ## SFSymbolKeyResource
 

@@ -12,12 +12,20 @@ let package = Package(
         .executableTarget(
             name: "SFSymbolKeyCodeGen",
             dependencies: [
+                .target(name: "CodeGen"),
+                .target(name: "MDGen"),
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+            ],
+        ),
+        .target(
+            name: "CodeGen",
+            dependencies: [
                 .target(name: "SFSymbolKeyResource"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ],
         ),
-        .executableTarget(
-            name: "SFSymbolVersionMDGen",
+        .target(
+            name: "MDGen",
             dependencies: [
                 .target(name: "SFSymbolKeyResource"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
