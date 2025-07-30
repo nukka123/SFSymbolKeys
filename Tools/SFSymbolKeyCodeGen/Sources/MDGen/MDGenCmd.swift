@@ -4,10 +4,9 @@ import Foundation
 import SFSymbolKeyResource
 
 public struct MDGenCmd: ParsableCommand {
-
     public static let configuration = CommandConfiguration(
         commandName: "md-gen",
-        abstract: "Generates Markdown documents."
+        abstract: "Generates Markdown documents.",
     )
 
     var outputFile: String = "../../Docs/SFSymbolVersions.md"
