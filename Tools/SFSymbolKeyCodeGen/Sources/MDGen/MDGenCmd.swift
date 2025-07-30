@@ -3,15 +3,23 @@ import ArgumentParser
 import Foundation
 import SFSymbolKeyResource
 
-@main
-struct SFSymbolVersionMDGen: ParsableCommand {
+public struct MDGenCmd: ParsableCommand {
+
+    public static let configuration = CommandConfiguration(
+        commandName: "md-gen",
+        abstract: "Generates Markdown documents."
+    )
+
     var outputFile: String = "../../Docs/SFSymbolVersions.md"
 
-    mutating func run() throws {
+    public init() {}
+
+    public func run() throws {
         let keyGroups: [SFSymbolKeyGroup] = SFSymbolKeyGroup.setup()
         let code = Self.outputSFSymbolVersions(keyGroups)
         let filePath = URL(fileURLWithPath: outputFile)
         try code.write(to: filePath, atomically: true, encoding: .utf8)
+        print("Generated: \(filePath.path)")
         print("Done.")
     }
 
