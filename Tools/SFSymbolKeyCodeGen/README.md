@@ -13,23 +13,29 @@ It exists as a completely independent tool from the `SFSymbolKeys` library.
 
 ## SFSymbolKeyCodeGen
 
-Generates code that defines identifiers for `SFSymbolKey` from the list of SF Symbols names loaded by SFSymbolKeyResource.
+`SFSymbolKeyCodeGen`, which is an executable target, consolidates the subcommands for updating the `SFSymbolKeys` library.
 
-The generated code is output to `SFSymbolKeys/Sources/SFSymbolKeys/Generated/`.
+You can view simple help with the following command:
 
-### Example:
+> $ swift run SFSymbolKeyCodeGen -h
+
+The following command executes all the subcommands necessary to update the `SFSymbolKeys` library:
 
 > $ swift run SFSymbolKeyCodeGen
 
-## SFSymbolVersionMDGen
+Currently, `CodeGen` and `MDGen` are executed.
 
-Generates a Markdown list of SF Symbols versions from the version information loaded by SFSymbolKeyResource.
+### Subcommand: CodeGen
+
+Generates code that defines `SFSymbolKey` identifiers from the list of SF Symbols names read by `SFSymbolKeyResource`.
+
+The generated code is output to `SFSymbolKeys/Sources/SFSymbolKeys/Generated/`.
+
+### Subcommand: MDGen
+
+Generates a Markdown list of versions from the SF Symbols version information read by `SFSymbolKeyResource`.
 
 The generated Markdown is output to `SFSymbolKeys/Docs/SFSymbolVersions.md`.
-
-### Example:
-
-> $ swift run SFSymbolVersionMDGen
 
 ## SFSymbolKeyResource
 
