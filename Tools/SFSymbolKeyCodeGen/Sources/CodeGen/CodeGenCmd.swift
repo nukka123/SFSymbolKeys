@@ -45,7 +45,7 @@ extension SFSymbolKeyGroup {
         "SFSymbolKey+v\(config.version).swift"
     }
 
-    private var keyGroupIdentifier: String {
+    var keyGroupIdentifier: String {
         "keysV\(config.version.underscoredString)"
     }
 
