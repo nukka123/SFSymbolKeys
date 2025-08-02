@@ -102,8 +102,8 @@ SF Symbols のバージョン と 利用可能なOSバージョンについて�
 SF Symbolの一覧を利用したい人のために、バージョン別のリストを取得するAPIを実験的に用意しています。
 
 ```swift
-let symbolKeys1_0: [SFSymbolKey] = SFSymbolKey.keysV1_0
-let symbolKeys7_0: [SFSymbolKey] = SFSymbolKey.keysV7_0
+let keys1: [(version: String, keys: [SFSymbolKey])] = SFSymbolKey.availableVersionedKeys
+let keys2: [SFSymbolKey] = SFSymbolKey.availableKeys
 ```
 
 > WARNING: この機能は実験的なAPIです。将来バージョンで変更する可能性があります。
