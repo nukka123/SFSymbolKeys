@@ -20,17 +20,20 @@ public struct CodeGenCmd: ParsableCommand {
 
         let keyGroups: [SFSymbolKeyGroup] = SFSymbolKeyGroup.setup()
 
-        for group in keyGroups {
-            let content = group.outputSwiftFileContent()
-            let filePath = URL(fileURLWithPath: outputDir).appendingPathComponent(group.sourceFile)
-            try content.write(to: filePath, atomically: true, encoding: .utf8)
-            print("Generated: \(filePath.path)")
+        do {
+            let codeGenTasks: [StaticKeysCodeGen] = keyGroups.map { StaticKeysCodeGen(keyGroup: $0) }
+            for codeGenTask in codeGenTasks {
+                let content = codeGenTask.outputSwiftFileContent()
+                let filePath = URL(fileURLWithPath: outputDir).appendingPathComponent(codeGenTask.sourceFile)
+                try content.write(to: filePath, atomically: true, encoding: .utf8)
+                print("Generated: \(filePath.path)")
+            }
         }
 
         do {
-            let codeGen = AvailableKeysCodeGen(keyGroups: keyGroups)
-            let content = codeGen.outputSwiftFileContent()
-            let filePath = URL(fileURLWithPath: outputDir).appendingPathComponent(codeGen.sourceFile)
+            let codeGenTask = AvailableKeysCodeGen(keyGroups: keyGroups)
+            let content = codeGenTask.outputSwiftFileContent()
+            let filePath = URL(fileURLWithPath: outputDir).appendingPathComponent(codeGenTask.sourceFile)
             try content.write(to: filePath, atomically: true, encoding: .utf8)
             print("Generated: \(filePath.path)")
         }
@@ -39,95 +42,7 @@ public struct CodeGenCmd: ParsableCommand {
     }
 }
 
-extension SFSymbolRawKey {
-    var rawIdentifier: String {
-        "`\(name)`"
-    }
-
-    var stringLiteral: String {
-        #""\#(name)""#
-    }
-}
-
-extension SFSymbolKeyGroup {
-    var sourceFile: String {
-        "SFSymbolKey+v\(config.version).swift"
-    }
-
-    var keyGroupIdentifier: String {
-        "keysV\(config.version.underscoredString)"
-    }
-
-    private func headerComment() -> String {
-        "// SF Symbols (v\(config.version)).\n"
-    }
-
-    private func availableAttr() -> String {
-        "@available("
-            + "iOS \(config.availability.iOS), "
-            + "macOS \(config.availability.macOS), "
-            + "macCatalyst \(config.availability.macCatalyst), "
-            + "tvOS \(config.availability.tvOS), "
-            + "watchOS \(config.availability.watchOS), "
-            + "visionOS \(config.availability.visionOS), "
-            + "*)\n"
-    }
-
-    private func extensionDecl(_ body: () -> String) -> String {
-        var code = ""
-        code += "public extension SFSymbolKey {\n"
-        code += body()
-        code += "}\n"
-        return code
-    }
-
-    private func outputStaticKeysDeclBlock() -> String {
-        var code = ""
-        code += availableAttr()
-        code += extensionDecl {
-            var body = ""
-            for rawKey in rawKeys {
-                body +=
-                    .sp4 + "static let \(rawKey.rawIdentifier) = Self(\(rawKey.stringLiteral))\n"
-            }
-            return body
-        }
-        return code
-    }
-
-    private func outputKeyGroupDeclBlock() -> String {
-        var code = ""
-        code += availableAttr()
-        code += extensionDecl {
-            var body = ""
-            body += .sp4 + "static let \(keyGroupIdentifier): [SFSymbolKey] = [\n"
-            for rawKey in rawKeys {
-                body += .sp4 + .sp4 + ".\(rawKey.rawIdentifier),\n"
-            }
-            body += .sp4 + "]\n"
-            return body
-        }
-        return code
-    }
-
-    func outputSwiftFileContent() -> String {
-        var code = ""
-        code += headerComment()
-        code += "\n"
-        code += outputStaticKeysDeclBlock()
-        code += "\n"
-        code += outputKeyGroupDeclBlock()
-        return code
-    }
-}
-
-extension String {
-    static var sp4: String {
-        "    "
-    }
-}
-
-extension FileManager {
+private extension FileManager {
     func directoryExists(atPath path: String) -> Bool {
         var isDirectory: ObjCBool = false
         let exists = fileExists(atPath: path, isDirectory: &isDirectory)
