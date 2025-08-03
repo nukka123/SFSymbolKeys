@@ -31,7 +31,7 @@ extension AvailableKeysCodeGen {
         "// SFSymbols + utilities.\n"
     }
 
-    private func extensionKeyDecl(_ body: () -> String) -> String {
+    private func extensionDecl(_ body: () -> String) -> String {
         var code = ""
         code += "public extension SFSymbolKey {\n"
         code += body()
@@ -41,7 +41,7 @@ extension AvailableKeysCodeGen {
 
     private func outputAvailableVersionedKeysBlock() -> String {
         var code = ""
-        code += extensionKeyDecl {
+        code += extensionDecl {
             var body = ""
             body += """
                 /// Symbol keys grouped by the OS version in which they were introduced.
@@ -73,7 +73,7 @@ extension AvailableKeysCodeGen {
 
     private func outputAvailabledKeysBlock() -> String {
         var code = ""
-        code += extensionKeyDecl {
+        code += extensionDecl {
             var body = ""
             body += """
                 /// All symbol keys available at runtime, regardless of version.
