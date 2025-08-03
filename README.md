@@ -103,8 +103,8 @@ For details on SF Symbols versions and supported OS versions, see [SFSymbolVersi
 For those who want to use a list of SF Symbols, we provide an experimental API to get lists by version.
 
 ```swift
-let symbolKeys1_0: [SFSymbolKey] = SFSymbolKey.keysV1_0
-let symbolKeys7_0: [SFSymbolKey] = SFSymbolKey.keysV7_0
+let keys1: [(version: String, keys: [SFSymbolKey])] = SFSymbolKey.availableVersionedKeys
+let keys2: [SFSymbolKey] = SFSymbolKey.availableKeys
 ```
 
 > WARNING: This feature is experimental and may change in future versions.

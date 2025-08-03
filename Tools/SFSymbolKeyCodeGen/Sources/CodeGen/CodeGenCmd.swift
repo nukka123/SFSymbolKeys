@@ -26,6 +26,15 @@ public struct CodeGenCmd: ParsableCommand {
             try content.write(to: filePath, atomically: true, encoding: .utf8)
             print("Generated: \(filePath.path)")
         }
+
+        do {
+            let codeGen = AvailableKeysCodeGen(keyGroups: keyGroups)
+            let content = codeGen.outputSwiftFileContent()
+            let filePath = URL(fileURLWithPath: outputDir).appendingPathComponent(codeGen.sourceFile)
+            try content.write(to: filePath, atomically: true, encoding: .utf8)
+            print("Generated: \(filePath.path)")
+        }
+
         print("Done.")
     }
 }
@@ -45,7 +54,7 @@ extension SFSymbolKeyGroup {
         "SFSymbolKey+v\(config.version).swift"
     }
 
-    private var keyGroupIdentifier: String {
+    var keyGroupIdentifier: String {
         "keysV\(config.version.underscoredString)"
     }
 
