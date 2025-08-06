@@ -25,40 +25,27 @@ extension StaticKeysCodeGen {
             + "*)\n"
     }
 
-    private func extensionDecl(_ body: () -> String) -> String {
-        var code = ""
-        code += "public extension SFSymbolKey {\n"
-        code += body()
-        code += "}\n"
-        return code
-    }
-
     private func outputStaticKeysDeclBlock() -> String {
         var code = ""
         code += availableAttr()
-        code += extensionDecl {
-            var body = ""
+        code += TextBlock("public extension SFSymbolKey {", "}") {
             for rawKey in keyGroup.rawKeys {
-                body +=
-                    .sp4 + "static let \(rawKey.rawIdentifier) = Self(\(rawKey.stringLiteral))\n"
+                $0 += "static let \(rawKey.rawIdentifier) = Self(\(rawKey.stringLiteral))"
             }
-            return body
-        }
+        }.string
         return code
     }
 
     private func outputKeyGroupDeclBlock() -> String {
         var code = ""
         code += availableAttr()
-        code += extensionDecl {
-            var body = ""
-            body += .sp4 + "static let \(keyGroup.keyGroupIdentifier): [SFSymbolKey] = [\n"
-            for rawKey in keyGroup.rawKeys {
-                body += .sp4 + .sp4 + ".\(rawKey.rawIdentifier),\n"
+        code += TextBlock("public extension SFSymbolKey {", "}") {
+            $0 += $0.textBlock("static let \(keyGroup.keyGroupIdentifier): [SFSymbolKey] = [", "]") {
+                for rawKey in keyGroup.rawKeys {
+                    $0 += ".\(rawKey.rawIdentifier),"
+                }
             }
-            body += .sp4 + "]\n"
-            return body
-        }
+        }.string
         return code
     }
 

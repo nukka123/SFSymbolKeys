@@ -31,59 +31,41 @@ extension AvailableKeysCodeGen {
         "// SFSymbols + utilities.\n"
     }
 
-    private func extensionDecl(_ body: () -> String) -> String {
-        var code = ""
-        code += "public extension SFSymbolKey {\n"
-        code += body()
-        code += "}\n"
-        return code
-    }
-
     private func outputAvailableVersionedKeysBlock() -> String {
-        var code = ""
-        code += extensionDecl {
-            var body = ""
-            body += """
+        TextBlock("public extension SFSymbolKey {", "}") {
+            $0 +=
+                """
                 /// Symbol keys grouped by the OS version in which they were introduced.
                 ///
                 /// Only includes versions available at runtime.
-                static let availableVersionedKeys: [(version: String, keys: [SFSymbolKey])] = {
-                    var keys: [(String, [SFSymbolKey])] = []
-            """ + "\n" + "\n"
-
-            for group in keyGroups {
-                body += """
+                """
+            $0 += $0.textBlock("static let availableVersionedKeys: [(version: String, keys: [SFSymbolKey])] = {", "}()") {
+                $0 += "var keys: [(String, [SFSymbolKey])] = []" + "\n"
+                for group in keyGroups {
+                    $0 +=
+                        """
                         if \(group.availableCheckExpr()) {
                             keys.append(("\(group.config.version.string)", SFSymbolKey.\(group.keyGroupIdentifier)))
                         } else {
                             return keys
                         }
-                """ + "\n" + "\n"
+                        """ + "\n"
+                }
+                $0 += "return keys"
             }
-
-            body += """
-                    return keys
-                }()
-            """ + "\n"
-
-            return body
-        }
-        return code
+        }.string
     }
 
     private func outputAvailabledKeysBlock() -> String {
-        var code = ""
-        code += extensionDecl {
-            var body = ""
-            body += """
+        TextBlock("public extension SFSymbolKey {", "}") {
+            $0 +=
+                """
                 /// All symbol keys available at runtime, regardless of version.
                 static let availableKeys: [SFSymbolKey] = {
                     Self.availableVersionedKeys.flatMap { $0.keys }
                 }()
-            """ + "\n"
-            return body
-        }
-        return code
+                """
+        }.string
     }
 
     func outputSwiftFileContent() -> String {
